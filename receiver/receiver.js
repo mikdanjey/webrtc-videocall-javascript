@@ -15,7 +15,7 @@ function handleSignallingData(data) {
     }
 }
 
-function createAndSendAnswer () {
+function createAndSendAnswer() {
     peerConn.createAnswer((answer) => {
         peerConn.setLocalDescription(answer)
         sendData({
@@ -42,7 +42,7 @@ function joinCall() {
     username = document.getElementById("username-input").value
 
     document.getElementById("video-call-div")
-    .style.display = "inline"
+        .style.display = "inline"
 
     navigator.getUserMedia({
         video: {
@@ -60,9 +60,9 @@ function joinCall() {
         let configuration = {
             iceServers: [
                 {
-                    "urls": ["stun:stun.l.google.com:19302", 
-                    "stun:stun1.l.google.com:19302", 
-                    "stun:stun2.l.google.com:19302"]
+                    "urls": ["stun:stun.l.google.com:19302",
+                        "stun:stun1.l.google.com:19302",
+                        "stun:stun2.l.google.com:19302"]
                 }
             ]
         }
@@ -72,13 +72,13 @@ function joinCall() {
 
         peerConn.onaddstream = (e) => {
             document.getElementById("remote-video")
-            .srcObject = e.stream
+                .srcObject = e.stream
         }
 
         peerConn.onicecandidate = ((e) => {
             if (e.candidate == null)
                 return
-            
+
             sendData({
                 type: "send_candidate",
                 candidate: e.candidate

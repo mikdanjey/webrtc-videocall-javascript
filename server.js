@@ -1,7 +1,7 @@
 const Socket = require("websocket").server
 const http = require("http")
 
-const server = http.createServer((req, res) => {})
+const server = http.createServer((req, res) => { })
 
 server.listen(3000, () => {
     console.log("Listening on port 3000...")
@@ -19,7 +19,7 @@ webSocket.on('request', (req) => {
 
         const user = findUser(data.username)
 
-        switch(data.type) {
+        switch (data.type) {
             case "store_user":
 
                 if (user != null) {
@@ -27,8 +27,8 @@ webSocket.on('request', (req) => {
                 }
 
                 const newUser = {
-                     conn: connection,
-                     username: data.username
+                    conn: connection,
+                    username: data.username
                 }
 
                 users.push(newUser)
@@ -39,14 +39,14 @@ webSocket.on('request', (req) => {
                     return
                 user.offer = data.offer
                 break
-            
+
             case "store_candidate":
                 if (user == null) {
                     return
                 }
                 if (user.candidates == null)
                     user.candidates = []
-                
+
                 user.candidates.push(data.candidate)
                 break
             case "send_answer":
@@ -78,7 +78,7 @@ webSocket.on('request', (req) => {
                     type: "offer",
                     offer: user.offer
                 }, connection)
-                
+
                 user.candidates.forEach(candidate => {
                     sendData({
                         type: "candidate",
@@ -105,7 +105,7 @@ function sendData(data, conn) {
 }
 
 function findUser(username) {
-    for (let i = 0;i < users.length;i++) {
+    for (let i = 0; i < users.length; i++) {
         if (users[i].username == username)
             return users[i]
     }
